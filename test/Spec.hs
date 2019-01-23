@@ -8,45 +8,45 @@ import System.Directory
 import System.Environment
 
 main = do
-    getProgName >>= print
-    runTestTT test_int
-    runTestTT testIO
-    runTestTT test_form
-    runTestTT test_form_invalid
-    runTestTT test_form_left
-    runTestTT test_form_right
-    runTestTT test_form_lr
-    runTestTT test_form_opr3
-    runTestTT test_form_opr1_3
-    runTestTT test_form_opr2_3
-    runTestTT test_form_opr_all
-    runTestTT test_form_opr_all_lv0
-    runTestTT test_form_opr_all_lv1
-    runTestTT test_form_opr_all_lv2
+  getProgName >>= print
+  runTestTT test_int
+  runTestTT testIO
+  runTestTT test_form
+  runTestTT test_form_invalid
+  runTestTT test_form_left
+  runTestTT test_form_right
+  runTestTT test_form_lr
+  runTestTT test_form_opr3
+  runTestTT test_form_opr1_3
+  runTestTT test_form_opr2_3
+  runTestTT test_form_opr_all
+  runTestTT test_form_opr_all_lv0
+  runTestTT test_form_opr_all_lv1
+  runTestTT test_form_opr_all_lv2
 
 test_int = "test int" ~: test [ 
-               "int 0" ~: (parser int "0")  ~?= Just (TpInt 0,"")
-              ,"int 1" ~: (parser int "1")  ~?= Just (TpInt 1,"")
-              ,"int 2" ~: (parser int "2")  ~?= Just (TpInt 2,"")
-              ,"int 3" ~: (parser int "3")  ~?= Just (TpInt 3,"")
-              ,"int 4" ~: (parser int "4")  ~?= Just (TpInt 4,"")
-              ,"int 5" ~: (parser int "5")  ~?= Just (TpInt 5,"")
-              ,"int 6" ~: (parser int "6")  ~?= Just (TpInt 6,"")
-              ,"int 7" ~: (parser int "7")  ~?= Just (TpInt 7,"")
-              ,"int 8" ~: (parser int "8")  ~?= Just (TpInt 8,"")
-              ,"int 9" ~: (parser int "9")  ~?= Just (TpInt 9,"")
-              ,"int 00" ~: (parser int "00")  ~?= Just (TpInt 0,"")
-              ,"int 01" ~: (parser int "01")  ~?= Just (TpInt 1,"")
-              ,"int 09" ~: (parser int "09")  ~?= Just (TpInt 9,"")
-              ,"int 0A" ~: (parser int "0A")  ~?= Just (TpInt 0,"A")
-              ,"int A0" ~: (parser int "A0")  ~?= Nothing
-              ,"null test1" ~: null [] ~=? True
-              -- ,"null test2" ~: null [] ~=? False
-           ]
+                "int 0" ~: (parser int "0")  ~?= Just (TpInt 0,"")
+                ,"int 1" ~: (parser int "1")  ~?= Just (TpInt 1,"")
+                ,"int 2" ~: (parser int "2")  ~?= Just (TpInt 2,"")
+                ,"int 3" ~: (parser int "3")  ~?= Just (TpInt 3,"")
+                ,"int 4" ~: (parser int "4")  ~?= Just (TpInt 4,"")
+                ,"int 5" ~: (parser int "5")  ~?= Just (TpInt 5,"")
+                ,"int 6" ~: (parser int "6")  ~?= Just (TpInt 6,"")
+                ,"int 7" ~: (parser int "7")  ~?= Just (TpInt 7,"")
+                ,"int 8" ~: (parser int "8")  ~?= Just (TpInt 8,"")
+                ,"int 9" ~: (parser int "9")  ~?= Just (TpInt 9,"")
+                ,"int 00" ~: (parser int "00")  ~?= Just (TpInt 0,"")
+                ,"int 01" ~: (parser int "01")  ~?= Just (TpInt 1,"")
+                ,"int 09" ~: (parser int "09")  ~?= Just (TpInt 9,"")
+                ,"int 0A" ~: (parser int "0A")  ~?= Just (TpInt 0,"A")
+                ,"int A0" ~: (parser int "A0")  ~?= Nothing
+                ,"null test1" ~: null [] ~=? True
+                -- ,"null test2" ~: null [] ~=? False
+        ]
 
 createEmptyFile file = writeFile file "this is temp file"
 testIO = "createEmptyFile" ~:
-         (do 
+        (do 
            (bracket
              (return ())
              -- (\dmy  -> return ())
@@ -63,39 +63,43 @@ testIO = "createEmptyFile" ~:
 
 test_form = "test form" ~: test [ 
                 "form 1+1" ~: (parser form "1+1")  
-                              ~?= Just (Op Plus 
+                                ~?= Just (Op Plus 
                                 (Tp (TpInt 1)) 
                                 (Tp (TpInt 1)),"")
                 ,"form 1 + 1" ~: (parser form "1 + 1")  
-                              ~?= Just (Op Plus 
+                                ~?= Just (Op Plus 
                                 (Tp (TpInt 1)) 
                                 (Tp (TpInt 1)),"")
+                ,"form 11+22" ~: (parser form "11+22")  
+                                ~?= Just (Op Plus 
+                                (Tp (TpInt 11)) 
+                                (Tp (TpInt 22)),"")
                 ,"form 1-1" ~: (parser form "1-1")  
-                              ~?= Just (Op Minus 
+                                ~?= Just (Op Minus 
                                 (Tp (TpInt 1)) 
                                 (Tp (TpInt 1)),"")
                 ,"form 1*1" ~: (parser form "1*1")  
-                              ~?= Just (Op Mult 
+                                ~?= Just (Op Mult 
                                 (Tp (TpInt 1)) 
                                 (Tp (TpInt 1)),"")
                 ,"form 1/1" ~: (parser form "1/1")  
-                              ~?= Just (Op Div 
+                                ~?= Just (Op Div 
                                 (Tp (TpInt 1)) 
                                 (Tp (TpInt 1)),"")
               ,"form 1+1*1" ~: (parser form "1+1*1")  
-                              ~?= Just (Op Plus 
+                                ~?= Just (Op Plus 
                                 (Tp (TpInt 1))
                                 (Op Mult 
                                         (Tp (TpInt 1))
                                         (Tp (TpInt 1))), "")
               ,"form 1*1+1" ~: (parser form "1*1+1")  
-                              ~?= Just (Op Plus 
+                                ~?= Just (Op Plus 
                                 (Op Mult 
                                         (Tp (TpInt 1)) 
                                         (Tp (TpInt 1)))
-                                (Tp (TpInt 1)) , "")
+                                        (Tp (TpInt 1)) , "")
               ,"form 1*1*1*1*1*1+1" ~: (parser form "1*1*1*1*1*1+1") 
-                              ~?= Just (Op Plus 
+                                ~?= Just (Op Plus 
                                                (Op Mult 
                                                        (Tp (TpInt 1)) 
                                                        (Op Mult 
