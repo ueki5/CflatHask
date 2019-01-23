@@ -1,19 +1,18 @@
-module CflatHas.Parser.TestParser where
-import CflatHas.Parser.Parser
-import CflatHas.Type.Type
+--module CflatHask.Parser.TestParser where
+import CflatHask.Parser.Parser
+import CflatHask.Type.Type
 import Test.HUnit
 import Control.Monad
 import Control.Exception
 import System.Directory
 import System.Environment
---import System.Envy
 
 main = do
     getProgName >>= print
     runTestTT test_int
-    -- runTestTT testIO
-    -- runTestTT test_form
-    -- runTestTT test_form_invalid
+    runTestTT testIO
+    runTestTT test_form
+--    runTestTT test_form_invalid
     runTestTT test_form_left
     runTestTT test_form_right
     runTestTT test_form_lr

@@ -1,8 +1,8 @@
-module CflatHas.Parser.Parser where
+module CflatHask.Parser.Parser where
 import Control.Monad
 import Control.Applicative hiding (many)
 import Data.Char
-import CflatHas.Type.Type
+import CflatHask.Type.Type
 
 -- Parser
 data Parser a = Parser {execParser::String -> Maybe (a, String)}

@@ -1,4 +1,4 @@
-module CflatHas.Type.Type where
+module CflatHask.Type.Type where
 
 data Type =  TpInt Int
               deriving (Eq, Ord, Show)
