@@ -8,21 +8,21 @@ import System.Directory
 import System.Environment
 
 main = do
-  getProgName >>= print
-  runTestTT test_int
-  runTestTT testIO
-  runTestTT test_form
-  runTestTT test_form_invalid
-  runTestTT test_form_left
-  runTestTT test_form_right
-  runTestTT test_form_lr
-  runTestTT test_form_opr3
-  runTestTT test_form_opr1_3
-  runTestTT test_form_opr2_3
-  runTestTT test_form_opr_all
-  runTestTT test_form_opr_all_lv0
-  runTestTT test_form_opr_all_lv1
-  runTestTT test_form_opr_all_lv2
+    getProgName >>= print
+    runTestTT test_int
+    runTestTT testIO
+    runTestTT test_form
+    runTestTT test_form_invalid
+    runTestTT test_form_left
+    runTestTT test_form_right
+    runTestTT test_form_lr
+    runTestTT test_form_opr3
+    runTestTT test_form_opr1_3
+    runTestTT test_form_opr2_3
+    runTestTT test_form_opr_all
+    runTestTT test_form_opr_all_lv0
+    runTestTT test_form_opr_all_lv1
+    runTestTT test_form_opr_all_lv2
 
 test_int = "test int" ~: test [ 
                 "int 0" ~: (parser int "0")  ~?= Just (TpInt 0,"")
