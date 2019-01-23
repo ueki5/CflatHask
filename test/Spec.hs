@@ -12,7 +12,7 @@ main = do
     runTestTT test_int
     runTestTT testIO
     runTestTT test_form
---    runTestTT test_form_invalid
+    runTestTT test_form_invalid
     runTestTT test_form_left
     runTestTT test_form_right
     runTestTT test_form_lr
@@ -62,23 +62,23 @@ testIO = "createEmptyFile" ~:
        where file = "sample.txt"
 
 test_form = "test form" ~: test [ 
-               "form 1+1" ~: (parser form "1+1")  
+                "form 1+1" ~: (parser form "1+1")  
                               ~?= Just (Op Plus 
                                 (Tp (TpInt 1)) 
                                 (Tp (TpInt 1)),"")
-              ,"form 1 + 1" ~: (parser form "1 + 1")  
+                ,"form 1 + 1" ~: (parser form "1 + 1")  
                               ~?= Just (Op Plus 
                                 (Tp (TpInt 1)) 
                                 (Tp (TpInt 1)),"")
-              ,"form 1-1" ~: (parser form "1-1")  
+                ,"form 1-1" ~: (parser form "1-1")  
                               ~?= Just (Op Minus 
                                 (Tp (TpInt 1)) 
                                 (Tp (TpInt 1)),"")
-              ,"form 1*1" ~: (parser form "1*1")  
+                ,"form 1*1" ~: (parser form "1*1")  
                               ~?= Just (Op Mult 
                                 (Tp (TpInt 1)) 
                                 (Tp (TpInt 1)),"")
-              ,"form 1/1" ~: (parser form "1/1")  
+                ,"form 1/1" ~: (parser form "1/1")  
                               ~?= Just (Op Div 
                                 (Tp (TpInt 1)) 
                                 (Tp (TpInt 1)),"")

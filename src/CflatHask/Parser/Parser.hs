@@ -10,10 +10,8 @@ instance Functor Parser where
   fmap = liftM
 instance Applicative Parser where
   pure v = Parser $ \inp -> Just (v, inp)
---  pure v = P (\inp -> [(v, inp)]) -- ここに，Monad の return で書いていたコードを移す
   (<*>) = ap
 instance Monad Parser where
---  return v = Parser $ \inp -> Just (v, inp)
   p >>= f = Parser $ \inp -> case parser p inp of
                                 Nothing -> Nothing
                                 Just (v, out) -> parser (f v) out
