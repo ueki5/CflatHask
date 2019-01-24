@@ -52,12 +52,12 @@ testIO = "createEmptyFile" ~:
             (\dmy  -> removeFile file)
             (\dmy' -> (do
                 (doesFileExist file >>= return . not) @? "Pre-condition test: File already exist."
-                    createEmptyFile file
-                    exi <- doesFileExist file
-                    exi @? "file is not exists."
-                    txt <- readFile file
-                    txt @=? "this is temp file")))
-            (doesFileExist file >>= \ret -> return . not $ ret) @? "Post-condition test: file is not removed.")
+                createEmptyFile file
+                exi <- doesFileExist file
+                exi @? "file is not exists."
+                txt <- readFile file
+                txt @=? "this is temp file")))
+        (doesFileExist file >>= \ret -> return . not $ ret) @? "Post-condition test: file is not removed.")
     where file = "sample.txt"
 
 test_form = "test form" ~: test [ 
