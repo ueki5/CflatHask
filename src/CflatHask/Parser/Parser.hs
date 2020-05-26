@@ -82,9 +82,7 @@ int = do
     cs <- token $ many1 digit
     return $ TpInt (read cs)
 fint :: Parser Formula
-fint = do
-    arg <- int
-    return (Tp arg)
+fint = Tp <$> int
 -- 演算子
 plus :: Parser Operator
 plus = token (char '+') >> return Plus
@@ -130,6 +128,5 @@ exprl frm o p = do
 exprr :: Formula -> Parser Operator -> Parser Formula -> Parser Formula
 exprr frm o p = do
     op <- o
-    frm' <- p
-    return (Op op frm frm')
+    Op op frm <$> p
     +++ return frm
