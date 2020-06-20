@@ -113,10 +113,10 @@ test_form = "test form" ~: test [
                                                (Tp (TpInt 1)),"")
     ]
 test_form_invalid = "test form invalid" ~: test [
-        "form 1++1" ~: (parser form "1++1")  ~?= Nothing
+        "form 1++1" ~: (parser form "1++1")  ~?= Just (Tp (TpInt 1),"++1")
         ,"form +1" ~: (parser form "+1")  ~?= Nothing
         ,"form D" ~: (parser form "D")  ~?= Nothing
-        ,"form 1+" ~: (parser form "1+")  ~?= Nothing
+        ,"form 1+" ~: (parser form "1+")  ~?=  Just (Tp (TpInt 1),"+")
         ,"form null" ~: (parser form "")  ~?= Nothing
     ]
 test_form_left = "test form left" ~: test [ 

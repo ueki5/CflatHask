@@ -21,6 +21,11 @@ description:         Please see the README on GitHub at <https://github.com/ueki
 
 dependencies:
 - base >= 4.7 && < 5
+- process
+- filepath
+- directory
+- text
+
 
 library:
   source-dirs: src
